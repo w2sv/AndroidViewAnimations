@@ -254,12 +254,12 @@ public class YoYo {
         animator.setTarget(target);
 
         if (pivotX == YoYo.CENTER_PIVOT) {
-            ViewCompat.setPivotX(target, target.getMeasuredWidth() / 2.0f);
+            target.setPivotX(target.getMeasuredWidth() / 2.0f);
         } else {
             target.setPivotX(pivotX);
         }
         if (pivotY == YoYo.CENTER_PIVOT) {
-            ViewCompat.setPivotY(target, target.getMeasuredHeight() / 2.0f);
+            target.setPivotY(target.getMeasuredHeight() / 2.0f);
         } else {
             target.setPivotY(pivotY);
         }

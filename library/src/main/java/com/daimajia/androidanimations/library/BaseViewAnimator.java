@@ -70,14 +70,14 @@ public abstract class BaseViewAnimator {
      * @param target
      */
     public void reset(View target) {
-        ViewCompat.setAlpha(target, 1);
-        ViewCompat.setScaleX(target, 1);
-        ViewCompat.setScaleY(target, 1);
-        ViewCompat.setTranslationX(target, 0);
-        ViewCompat.setTranslationY(target, 0);
-        ViewCompat.setRotation(target, 0);
-        ViewCompat.setRotationY(target, 0);
-        ViewCompat.setRotationX(target, 0);
+        target.setAlpha(1);
+        target.setScaleX(1);
+        target.setScaleY(1);
+        target.setTranslationX(0);
+        target.setTranslationY(0);
+        target.setRotation(0);
+        target.setRotationY(0);
+        target.setRotationX(0);
     }
 
     /**

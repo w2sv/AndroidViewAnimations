@@ -30,8 +30,6 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.Interpolator;
 
-import androidx.core.view.ViewCompat;
-
 public abstract class BaseViewAnimator {
 
     public static final long DURATION = 1000;

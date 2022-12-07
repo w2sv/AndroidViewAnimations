@@ -166,15 +166,15 @@ public enum Techniques {
     ZoomOutRight(ZoomOutRightAnimator.class),
     ZoomOutUp(ZoomOutUpAnimator.class);
 
-    private final Class animatorClazz;
+    private final Class<BaseViewAnimator> animatorClazz;
 
-    Techniques(Class clazz) {
-        animatorClazz = clazz;
+    <T extends BaseViewAnimator> Techniques(Class<T> clazz) {
+        animatorClazz = (Class<BaseViewAnimator>) clazz;
     }
 
     public BaseViewAnimator getAnimator() {
         try {
-            return (BaseViewAnimator) animatorClazz.newInstance();
+            return animatorClazz.newInstance();
         } catch (Exception e) {
             throw new Error("Can not init animatorClazz instance");
         }

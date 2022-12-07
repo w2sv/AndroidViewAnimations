@@ -30,8 +30,6 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.Interpolator;
 
-import androidx.core.view.ViewCompat;
-
 import java.util.ArrayList;
 import java.util.List;
 

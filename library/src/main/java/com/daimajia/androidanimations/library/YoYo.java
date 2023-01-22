@@ -33,6 +33,7 @@ import android.view.animation.Interpolator;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class YoYo {
 
     private static final long DURATION = BaseViewAnimator.DURATION;
@@ -40,22 +41,21 @@ public class YoYo {
     public static final int INFINITE = -1;
     public static final float CENTER_PIVOT = Float.MAX_VALUE;
 
-    private BaseViewAnimator animator;
-    private long duration;
-    private long delay;
-    private boolean repeat;
-    private int repeatTimes;
-    private int repeatMode;
-    private Interpolator interpolator;
-    private float pivotX, pivotY;
-    private List<Animator.AnimatorListener> callbacks;
-    private View target;
+    private final BaseViewAnimator animator;
+    private final long duration;
+    private final long delay;
+    private final int repeatTimes;
+    private final int repeatMode;
+    private final Interpolator interpolator;
+    private final float pivotX;
+    private final float pivotY;
+    private final List<Animator.AnimatorListener> callbacks;
+    private final View target;
 
     private YoYo(AnimationComposer animationComposer) {
         animator = animationComposer.animator;
         duration = animationComposer.duration;
         delay = animationComposer.delay;
-        repeat = animationComposer.repeat;
         repeatTimes = animationComposer.repeatTimes;
         repeatMode = animationComposer.repeatMode;
         interpolator = animationComposer.interpolator;
@@ -77,7 +77,7 @@ public class YoYo {
         public void call(Animator animator);
     }
 
-    private static class EmptyAnimatorListener implements Animator.AnimatorListener {
+    private static class SimpleAnimatorListener implements Animator.AnimatorListener {
         @Override
         public void onAnimationStart(Animator animation) {
         }
@@ -97,18 +97,18 @@ public class YoYo {
 
     public static final class AnimationComposer {
 
-        private List<Animator.AnimatorListener> callbacks = new ArrayList<>();
+        public final List<Animator.AnimatorListener> callbacks = new ArrayList<>();
 
-        private BaseViewAnimator animator;
-        private long duration = DURATION;
+        public final BaseViewAnimator animator;
+        public long duration = DURATION;
 
-        private long delay = NO_DELAY;
-        private boolean repeat = false;
-        private int repeatTimes = 0;
-        private int repeatMode = ValueAnimator.RESTART;
-        private float pivotX = YoYo.CENTER_PIVOT, pivotY = YoYo.CENTER_PIVOT;
-        private Interpolator interpolator;
-        private View target;
+        public long delay = NO_DELAY;
+        public boolean repeat = false;
+        public int repeatTimes = 0;
+        public int repeatMode = ValueAnimator.RESTART;
+        public float pivotX = YoYo.CENTER_PIVOT, pivotY = YoYo.CENTER_PIVOT;
+        public Interpolator interpolator;
+        public View target;
 
         private AnimationComposer(Techniques techniques) {
             this.animator = techniques.getAnimator();
@@ -169,7 +169,7 @@ public class YoYo {
         }
 
         public AnimationComposer onStart(final AnimatorCallback callback) {
-            callbacks.add(new EmptyAnimatorListener() {
+            callbacks.add(new SimpleAnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     callback.call(animation);
@@ -179,7 +179,7 @@ public class YoYo {
         }
 
         public AnimationComposer onEnd(final AnimatorCallback callback) {
-            callbacks.add(new EmptyAnimatorListener() {
+            callbacks.add(new SimpleAnimatorListener() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     callback.call(animation);
@@ -189,7 +189,7 @@ public class YoYo {
         }
 
         public AnimationComposer onCancel(final AnimatorCallback callback) {
-            callbacks.add(new EmptyAnimatorListener() {
+            callbacks.add(new SimpleAnimatorListener() {
                 @Override
                 public void onAnimationCancel(Animator animation) {
                     callback.call(animation);
@@ -199,7 +199,7 @@ public class YoYo {
         }
 
         public AnimationComposer onRepeat(final AnimatorCallback callback) {
-            callbacks.add(new EmptyAnimatorListener() {
+            callbacks.add(new SimpleAnimatorListener() {
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                     callback.call(animation);
@@ -220,8 +220,8 @@ public class YoYo {
      */
     public static final class YoYoString {
 
-        private BaseViewAnimator animator;
-        private View target;
+        private final BaseViewAnimator animator;
+        private final View target;
 
         private YoYoString(BaseViewAnimator animator, View target) {
             this.target = target;
@@ -276,5 +276,4 @@ public class YoYo {
         animator.animate();
         return animator;
     }
-
 }

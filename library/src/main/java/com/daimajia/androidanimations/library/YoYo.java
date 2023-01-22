@@ -65,12 +65,12 @@ public class YoYo {
         target = animationComposer.target;
     }
 
-    public static AnimationComposer with(Techniques techniques) {
-        return new AnimationComposer(techniques);
+    public static AnimationComposer with(Techniques techniques, View target) {
+        return new AnimationComposer(techniques, target);
     }
 
-    public static AnimationComposer with(BaseViewAnimator animator) {
-        return new AnimationComposer(animator);
+    public static AnimationComposer with(BaseViewAnimator animator, View target) {
+        return new AnimationComposer(animator, target);
     }
 
     public interface AnimatorCallback {
@@ -101,21 +101,21 @@ public class YoYo {
 
         public final BaseViewAnimator animator;
         public long duration = DURATION;
-
         public long delay = NO_DELAY;
         public boolean repeat = false;
         public int repeatTimes = 0;
         public int repeatMode = ValueAnimator.RESTART;
         public float pivotX = YoYo.CENTER_PIVOT, pivotY = YoYo.CENTER_PIVOT;
         public Interpolator interpolator;
-        public View target;
+        public final View target;
 
-        private AnimationComposer(Techniques techniques) {
-            this.animator = techniques.getAnimator();
+        private AnimationComposer(Techniques techniques, View target) {
+            this(techniques.getAnimator(), target);
         }
 
-        private AnimationComposer(BaseViewAnimator animator) {
+        private AnimationComposer(BaseViewAnimator animator, View target) {
             this.animator = animator;
+            this.target = target;
         }
 
         public AnimationComposer duration(long duration) {
@@ -208,8 +208,7 @@ public class YoYo {
             return this;
         }
 
-        public YoYoString playOn(View target) {
-            this.target = target;
+        public YoYoString playOn() {
             return new YoYoString(new YoYo(this).play(), this.target);
         }
 

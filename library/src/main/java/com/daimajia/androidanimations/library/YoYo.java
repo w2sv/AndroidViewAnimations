@@ -208,7 +208,7 @@ public class YoYo {
             return this;
         }
 
-        public YoYoString playOn() {
+        public YoYoString play() {
             return new YoYoString(new YoYo(this).play(), this.target);
         }
 

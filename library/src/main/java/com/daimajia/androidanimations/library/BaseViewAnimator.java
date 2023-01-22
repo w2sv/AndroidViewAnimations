@@ -30,20 +30,15 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.Interpolator;
 
+@SuppressWarnings("unused")
 public abstract class BaseViewAnimator {
 
     public static final long DURATION = 1000;
-
-    private AnimatorSet mAnimatorSet;
+    private AnimatorSet mAnimatorSet = new AnimatorSet();
 
     private long mDuration = DURATION;
     private int mRepeatTimes = 0;
     private int mRepeatMode = ValueAnimator.RESTART;
-
-    {
-        mAnimatorSet = new AnimatorSet();
-    }
-
 
     protected abstract void prepare(View target);
 
@@ -64,8 +59,6 @@ public abstract class BaseViewAnimator {
 
     /**
      * reset the view to default status
-     *
-     * @param target
      */
     public void reset(View target) {
         target.setAlpha(1);
@@ -97,18 +90,16 @@ public abstract class BaseViewAnimator {
         return this;
     }
 
-    public BaseViewAnimator setStartDelay(long delay) {
+    public void setStartDelay(long delay) {
         getAnimatorAgent().setStartDelay(delay);
-        return this;
     }
 
     public long getStartDelay() {
         return mAnimatorSet.getStartDelay();
     }
 
-    public BaseViewAnimator addAnimatorListener(Animator.AnimatorListener l) {
+    public void addAnimatorListener(Animator.AnimatorListener l) {
         mAnimatorSet.addListener(l);
-        return this;
     }
 
     public void cancel() {

@@ -89,6 +89,7 @@ import com.daimajia.androidanimations.library.zooming_exits.ZoomOutLeftAnimator;
 import com.daimajia.androidanimations.library.zooming_exits.ZoomOutRightAnimator;
 import com.daimajia.androidanimations.library.zooming_exits.ZoomOutUpAnimator;
 
+@SuppressWarnings("unused")
 public enum Techniques {
 
     DropOut(DropOutAnimator.class),
